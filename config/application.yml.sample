@@ -1,0 +1,11 @@
+defaults: &defaults
+  base_url: https://uspdigital.usp.br/jupiterweb
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
