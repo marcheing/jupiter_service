@@ -1,0 +1,50 @@
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'db/**/*'
+  TargetRubyVersion: 2.3
+
+Style/Encoding:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/CaseIndentation:
+  IndentWhenRelativeTo: end
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/IndentHash:
+  Enabled: false
+
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    inject: 'inject'
+
+Metrics/AbcSize:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/ModuleLength:
+  Max: 100
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 15

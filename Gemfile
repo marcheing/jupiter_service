@@ -22,6 +22,9 @@ group :development, :test do
 
   # Testing framework for rails
   gem 'rspec-rails', '~> 3.5'
+
+  # Static code analyzer
+  gem 'rubocop', '~> 0.42.0'
 end
 
 group :development do
