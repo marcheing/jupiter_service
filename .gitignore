@@ -22,3 +22,6 @@
 
 # Ignore any configuration file
 config/*.yml
+
+# Coverage directory for simplecov
+coverage

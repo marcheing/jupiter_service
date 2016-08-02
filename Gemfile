@@ -27,6 +27,11 @@ group :development, :test do
   gem 'rubocop', '~> 0.42.0'
 end
 
+group :test do
+  # Code coverage measures for tests
+  gem 'simplecov', require: false
+end
+
 group :development do
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
