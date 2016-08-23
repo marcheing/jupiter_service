@@ -25,6 +25,9 @@ group :development, :test do
 
   # Static code analyzer
   gem 'rubocop', '~> 0.42.0'
+
+  # Records HTTP responses from external services for testing
+  gem 'vcr', '~> 3.0.3'
 end
 
 group :test do
