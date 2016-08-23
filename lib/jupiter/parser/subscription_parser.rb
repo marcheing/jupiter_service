@@ -3,11 +3,6 @@ module Jupiter
     class SubscriptionParser < Base
       attr_reader :subscriptions
 
-      def initialize(doc)
-        @doc = doc
-        super()
-      end
-
       private
 
       def parse

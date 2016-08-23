@@ -12,7 +12,8 @@ module Jupiter
         raise NotImplementedError
       end
 
-      def initialize
+      def initialize(doc)
+        @doc = doc
         @state = INITIAL_STATE
         @errors = []
         parse

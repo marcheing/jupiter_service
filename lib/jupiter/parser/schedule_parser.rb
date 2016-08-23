@@ -3,11 +3,6 @@ module Jupiter
     class ScheduleParser < Base
       attr_reader :schedules
 
-      def initialize(doc)
-        @doc = doc
-        super()
-      end
-
       private
 
       def parse

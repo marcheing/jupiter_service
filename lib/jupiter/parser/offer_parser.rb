@@ -13,9 +13,8 @@ module Jupiter
       attr_reader :offers, *PAGE_FIELDS
 
       def initialize(doc, code)
-        @doc = doc
         @code = code
-        super()
+        super(doc)
       end
 
       def self.setting_key
