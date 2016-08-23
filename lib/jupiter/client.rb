@@ -12,6 +12,10 @@ module Jupiter
       request(ENDPOINTS[:faculties], PARAMETERS[:faculties])
     end
 
+    def offers(code)
+      request(ENDPOINTS[:offers], sgldis: code)
+    end
+
     private
 
     def request(endpoint, parameters = {}, method = :get)

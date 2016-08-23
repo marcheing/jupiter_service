@@ -1,9 +1,11 @@
 require 'jupiter/client'
 require 'jupiter/jupiter_error'
+require 'jupiter/parser'
 
 module Jupiter
   ENDPOINTS = {
-    faculties: 'jupColegiadoLista'.freeze
+    faculties: 'jupColegiadoLista'.freeze,
+    offers: 'obterTurma'.freeze
   }.freeze
 
   PARAMETERS = {
