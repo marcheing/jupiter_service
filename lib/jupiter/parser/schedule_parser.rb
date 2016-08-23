@@ -30,10 +30,10 @@ module Jupiter
       def create_schedule(row)
         schedule = Schedule.new
         fields = row.xpath('td')
-        schedule.day = fields[0].at_xpath('font/span').text.strip
-        schedule.start_time = fields[1].at_xpath('font/span').text.strip
-        schedule.end_time = fields[2].at_xpath('font/span').text.strip
-        schedule.professor = fields[3].at_xpath('font/span').text.strip
+        schedule.day = element_text_at_xpath(fields[0], 'font/span')
+        schedule.start_time = element_text_at_xpath(fields[1], 'font/span')
+        schedule.end_time = element_text_at_xpath(fields[2], 'font/span')
+        schedule.professor = element_text_at_xpath(fields[3], 'font/span')
         schedule
       end
     end
