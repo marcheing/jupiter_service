@@ -1,6 +1,8 @@
 language: ruby
 
-script: bundle exec rake
+script:
+- ./bin/setup
+- bundle exec rake
 
 rvm:
   - 2.3.1
