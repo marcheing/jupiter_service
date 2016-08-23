@@ -17,6 +17,8 @@ defaults: &defaults
   single_faculty:
     name: '//*[@id="layout_conteudo"]/table[1]/tr/td/font/span/b'
     campus: '//*[@id="layout_conteudo"]/table[2]/tr/td/font/span'
+    warning_message: '//*[@id="layout_conteudo"]/table[1]/tr/td/font/span[contains(@class, "txt_verdana_10pt_red")]'
+    there_is_no_offer: 'Não existe curso/habilitação cadastrado para a Unidade'
 
 development:
   <<: *defaults

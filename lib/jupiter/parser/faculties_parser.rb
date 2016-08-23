@@ -1,6 +1,6 @@
 module Jupiter
   module Parser
-    class FacultyParser < Base
+    class FacultiesParser < Base
       attr_reader :faculties, :other_entities
 
       def initialize(client)
