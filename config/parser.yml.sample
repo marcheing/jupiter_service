@@ -1,0 +1,20 @@
+defaults: &defaults
+  offers:
+    separator: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[6]/tr/td/table'
+    faculty_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[1]/td/b/font/span'
+    cycle_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[3]/td/b/font/span'
+    course: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[5]/td/font/span/b'
+    class_code: 'tr[1]/td[2]/font/span'
+    start_date: 'tr[2]/td[2]/font/span'
+    end_date: 'tr[3]/td[2]/font/span'
+    class_type: 'tr[4]/td[2]/font/span'
+    observations: 'tr[5]/td[2]/font/span'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
