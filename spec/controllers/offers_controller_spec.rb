@@ -46,5 +46,27 @@ describe OffersController do
         end
       end
     end
+
+    context 'ACH0042 from 2016, 2nd term' do
+      let(:schedule_day) { 'seg' }
+      let(:schedule_start_time) { '08:00' }
+      let(:schedule_end_time) { '12:00' }
+      let(:schedule_professor_1) { 'Diamantino Alves Correia Pereira' }
+      let(:schedule_professor_2) { 'Dominique Mouette' }
+      let(:schedule_professor_3) { 'Fabio Campos' }
+
+      it 'correctly parsers the professors on the schedules' do
+        VCR.use_cassette 'offers/ach0042_20162' do
+          get :offer, params: { code: 'ACH0042' }
+
+          response_body = JSON.parse response.body
+          offers = response_body['offers']
+          expect(offers.first['schedules'].size).to eq 3
+          expect(offers.first['schedules'].first['professor']).to eq schedule_professor_1
+          expect(offers.first['schedules'].second['professor']).to eq schedule_professor_2
+          expect(offers.first['schedules'].last['professor']).to eq schedule_professor_3
+        end
+      end
+    end
   end
 end
