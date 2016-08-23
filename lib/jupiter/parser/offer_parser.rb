@@ -15,7 +15,7 @@ module Jupiter
       def initialize(doc, code)
         @doc = doc
         @code = code
-        parse
+        super()
       end
 
       def self.setting_key
@@ -23,6 +23,16 @@ module Jupiter
       end
 
       def response_hash
+        successful? ? success_hash : failure_hash
+      end
+
+      private
+
+      def failure_hash
+        { errors: @errors }
+      end
+
+      def success_hash
         {
           faculty_name: @faculty_name,
           cycle_name: @cycle_name,
@@ -31,11 +41,23 @@ module Jupiter
         }
       end
 
-      private
-
       def parse
+        check_if_there_is_an_offer
         create_static_fields
         create_offers
+        success
+      rescue ParserError => error
+        failure(error.message)
+      end
+
+      def check_if_there_is_an_offer
+        warning = parse_field(:web_message)
+        return if warning.empty?
+        if /#{settings[:there_is_no_offer]}/ =~ warning
+          raise ParserError, 'No offer associated with this course'
+        else
+          raise ParserError, "The page gave a warning: #{warning}"
+        end
       end
 
       def offer_number

@@ -1,5 +1,7 @@
 defaults: &defaults
   offers:
+    web_message: '//*[@id="web_mensagem"]/p'
+    there_is_no_offer: 'Não existe oferecimento para a sigla '
     separator: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[6]/tr/td/table'
     faculty_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[1]/td/b/font/span'
     cycle_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[3]/td/b/font/span'

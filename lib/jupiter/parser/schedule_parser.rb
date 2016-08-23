@@ -5,7 +5,7 @@ module Jupiter
 
       def initialize(doc)
         @doc = doc
-        parse
+        super()
       end
 
       private

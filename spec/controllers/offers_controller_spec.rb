@@ -68,5 +68,18 @@ describe OffersController do
         end
       end
     end
+
+    context 'course without offer' do
+      it 'responds with unprocessable entity' do
+        VCR.use_cassette 'offers/mac2166_20162' do
+          get :offer, params: { code: 'MAC2166' }
+
+          response_body = JSON.parse response.body
+          expect(response.status).to eq 422
+          errors = response_body['errors']
+          expect(errors.first).to match(/No offer associated/)
+        end
+      end
+    end
   end
 end

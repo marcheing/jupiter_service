@@ -2,17 +2,41 @@ module Jupiter
   module Parser
     class Base
       attr_accessor :doc
+      attr_reader :state, :errors
+
+      INITIAL_STATE = :initial
+      SUCCESSFUL_STATE = :successful
+      UNSUCCESSFUL_STATE = :unsuccessful
 
       def self.setting_key
         raise NotImplementedError
       end
 
+      def initialize
+        @state = INITIAL_STATE
+        @errors = []
+        parse
+      end
+
+      def successful?
+        @state == SUCCESSFUL_STATE
+      end
+
+      protected
+
+      def success
+        @state = SUCCESSFUL_STATE
+      end
+
+      def failure(message = '')
+        @state = UNSUCCESSFUL_STATE
+        @errors << message
+      end
+
       private
 
       def parse_field(field, element = @doc)
-        parsed_element = element.at_xpath(settings[self.class.setting_key][field])
-        raise if parsed_element.nil?
-        parsed_element.text.strip
+        element_text_at_xpath(element, settings[self.class.setting_key][field])
       end
 
       def settings
