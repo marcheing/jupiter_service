@@ -22,6 +22,15 @@ module Jupiter
         :offers
       end
 
+      def response_hash
+        {
+          faculty_name: @faculty_name,
+          cycle_name: @cycle_name,
+          course: @course,
+          offers: @offers
+        }
+      end
+
       private
 
       def parse
@@ -47,8 +56,8 @@ module Jupiter
         Offer::FIELDS.each do |field|
           offer.instance_variable_set(:"@#{field}", parse_field(field, offer_element))
         end
-        schedules = Jupiter::Parser::ScheduleParser.new(schedule_element).schedule
-        subsciptions = Jupiter::Parser::SubscriptionParser.new(subscription_element).subscriptions
+        offer.schedules = Jupiter::Parser::ScheduleParser.new(schedule_element).schedules
+        offer.subscriptions = Jupiter::Parser::SubscriptionParser.new(subscription_element).subscriptions
         offer
       end
 
