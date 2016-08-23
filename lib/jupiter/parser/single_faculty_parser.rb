@@ -31,10 +31,21 @@ module Jupiter
       end
 
       def parse
+        check_for_cycles
         create_faculty
         success
       rescue ParserError => error
         failure(error.message)
+      end
+
+      def check_for_cycles
+        warning = parse_field(:warning_message)
+        return if warning.empty?
+        if /#{settings[:there_is_no_cycle]}/ =~ warning
+          raise ParserError, "No cycle found for faculty with code: #{@code}"
+        else
+          raise ParserError, "The page gave a warning: #{warning}"
+        end
       end
 
       def create_faculty

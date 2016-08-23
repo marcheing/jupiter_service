@@ -1,18 +1,20 @@
 require 'rails_helper'
 
 describe FacultiesController do
-  describe 'all_faculties' do
-    let(:ime) do
-      Faculty.new.tap do |f|
-        f.code = 45
-        f.name = 'Instituto de Matemática e Estatística'
-      end
+  let(:ime) do
+    Faculty.new.tap do |f|
+      f.code = 45
+      f.name = 'Instituto de Matemática e Estatística'
+      f.campus = 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"'
     end
+  end
 
+  describe 'all_faculties' do
     let(:poli) do
       Faculty.new.tap do |f|
         f.code = 3
         f.name = 'Escola Politécnica'
+        f.campus = 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"'
       end
     end
 
@@ -38,14 +40,6 @@ describe FacultiesController do
   end
 
   describe 'single_faculty' do
-    let(:ime) do
-      Faculty.new.tap do |f|
-        f.code = 45
-        f.name = 'Instituto de Matemática e Estatística'
-        f.campus = 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"'
-      end
-    end
-
     it 'returns the faculty info with the passed code' do
       VCR.use_cassette 'faculties/ime_usp_20162' do
         get :single_faculty, params: { code: 45 }
