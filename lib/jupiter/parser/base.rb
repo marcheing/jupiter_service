@@ -20,7 +20,9 @@ module Jupiter
       end
 
       def element_text_at_xpath(element, xpath)
-        element.at_xpath(xpath).text.strip
+        child_element = element.at_xpath(xpath)
+        return '' if child_element.nil?
+        child_element.text.strip
       end
     end
   end
