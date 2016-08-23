@@ -1,3 +1,4 @@
+require 'jupiter/parser/parser_error'
 require 'jupiter/parser/base'
 require 'jupiter/parser/offer_parser'
 require 'jupiter/parser/schedule_parser'
