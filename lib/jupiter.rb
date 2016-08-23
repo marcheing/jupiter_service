@@ -5,11 +5,13 @@ require 'jupiter/parser'
 module Jupiter
   ENDPOINTS = {
     faculties: 'jupColegiadoLista'.freeze,
+    single_faculty: 'jupCursoLista'.freeze,
     offers: 'obterTurma'.freeze
   }.freeze
 
   PARAMETERS = {
-    faculties: { tipo: 'D' }.freeze
+    faculties: { tipo: 'D' }.freeze,
+    single_faculty: { tipo: 'N' }.freeze
   }.freeze
 
   def self.new

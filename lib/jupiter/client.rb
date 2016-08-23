@@ -12,6 +12,10 @@ module Jupiter
       request(ENDPOINTS[:faculties], PARAMETERS[:faculties])
     end
 
+    def single_faculty(code)
+      request(ENDPOINTS[:single_faculty], PARAMETERS[:single_faculty].merge(codcg: code))
+    end
+
     def offers(code)
       request(ENDPOINTS[:offers], sgldis: code)
     end

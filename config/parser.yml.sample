@@ -11,6 +11,12 @@ defaults: &defaults
     end_date: 'tr[3]/td[2]/font/span'
     class_type: 'tr[4]/td[2]/font/span'
     observations: 'tr[5]/td[2]/font/span'
+  faculties:
+    main_table: '//*[@id="layout_conteudo"]/table[2]/tr'
+    other_entities_table: '//*[@id="layout_conteudo"]/table[4]/tr'
+  single_faculty:
+    name: '//*[@id="layout_conteudo"]/table[1]/tr/td/font/span/b'
+    campus: '//*[@id="layout_conteudo"]/table[2]/tr/td/font/span'
 
 development:
   <<: *defaults

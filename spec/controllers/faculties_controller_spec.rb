@@ -38,9 +38,22 @@ describe FacultiesController do
   end
 
   describe 'single_faculty' do
-    pending 'single_faculty action' do
-      it 'returns the faculty info with the passed code' do
-        get :faculty
+    let(:ime) do
+      Faculty.new.tap do |f|
+        f.code = 45
+        f.name = 'Instituto de Matemática e Estatística'
+        f.campus = 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"'
+      end
+    end
+
+    it 'returns the faculty info with the passed code' do
+      VCR.use_cassette 'faculties/ime_usp_20162' do
+        get :single_faculty, params: { code: 45 }
+
+        response_body = JSON.parse response.body
+        expect(response_body['code']).to eq ime.code
+        expect(response_body['name']).to eq ime.name
+        expect(response_body['campus']).to eq ime.campus
       end
     end
   end
