@@ -18,6 +18,10 @@ module Jupiter
       def settings
         ParserSettings.to_h.with_indifferent_access
       end
+
+      def element_text_at_xpath(element, xpath)
+        element.at_xpath(xpath).text.strip
+      end
     end
   end
 end
