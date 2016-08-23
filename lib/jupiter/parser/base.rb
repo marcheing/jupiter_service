@@ -49,6 +49,10 @@ module Jupiter
         return '' if child_element.nil?
         child_element.text.strip
       end
+
+      def table_rows_ignoring_column_name_row(table_xpath)
+        @doc.xpath(table_xpath)[1..-1]
+      end
     end
   end
 end

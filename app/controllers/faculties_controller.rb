@@ -1,6 +1,11 @@
 class FacultiesController < ApplicationController
-  def read_faculties
+  def all_faculties
     doc = client.faculties
-    render json: { faculties: doc.css('a[class=link_gray]').map(&:text) }
+    parser = Jupiter::Parser::FacultyParser.new(doc)
+    render json: parser.response_hash, status: parser.successful? ? :ok : :unprocessable_entity
+  end
+
+  def single_faculty
+    code = params[:code]
   end
 end
