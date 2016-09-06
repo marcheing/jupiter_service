@@ -20,6 +20,10 @@ module Jupiter
       request(ENDPOINTS[:offers], sgldis: code)
     end
 
+    def cycles(code)
+      request(ENDPOINTS[:cycles], PARAMETERS[:cycles].merge(codcg: code))
+    end
+
     private
 
     def request(endpoint, parameters = {}, method = :get)
