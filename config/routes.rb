@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get 'faculty/:code' => 'faculties#single_faculty', as: :single_faculty
   get 'offer/:code' => 'offers#offer', as: :offer
   get 'cycles/:code' => 'cycles#cycles', as: :cycles
+  get 'cycle' => 'cycles#cycle', as: :cycle
 end

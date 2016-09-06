@@ -21,6 +21,14 @@ defaults: &defaults
     there_is_no_offer: 'Não existe curso/habilitação cadastrado para a Unidade'
   cycles:
     cycles_table: '//*[@id="layout_conteudo"]/table[3]/tr'
+  cycle:
+    name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr/td/font[2]/span'
+    start_date: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[6]/tr[1]/td[2]/font/span'
+    ideal_duration: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[5]/tr[1]/td[5]/font/span'
+    minimum_duration: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[5]/tr[2]/td[5]/font/span'
+    maximum_duration: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[5]/tr[3]/td[5]/font/span'
+    workload_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[7]/tr'
+    specific_information: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[7]/tr[3]/td/font/span'
 
 development:
   <<: *defaults

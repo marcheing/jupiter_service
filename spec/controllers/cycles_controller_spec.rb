@@ -40,4 +40,19 @@ describe CyclesController do
       end
     end
   end
+
+  describe 'cycle' do
+    let(:codcg) { 45 }
+    let(:codcur) { 45_052 }
+    let(:codhab) { 1 }
+
+    it 'returns a cycle' do
+      VCR.use_cassette "cycle/codcg#{codcg}codcur#{codcur}codhab#{codhab}" do
+        get :cycle, params: { codcg: codcg, codcur: codcur, codhab: codhab }
+
+        response_body = JSON.parse response.body
+        p response_body
+      end
+    end
+  end
 end

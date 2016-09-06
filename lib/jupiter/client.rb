@@ -24,6 +24,10 @@ module Jupiter
       request(ENDPOINTS[:cycles], PARAMETERS[:cycles].merge(codcg: code))
     end
 
+    def cycle(codcg, codcur, codhab)
+      request(ENDPOINTS[:cycle], PARAMETERS[:cycle].merge(codcg: codcg, codcur: codcur, codhab: codhab))
+    end
+
     private
 
     def request(endpoint, parameters = {}, method = :get)
