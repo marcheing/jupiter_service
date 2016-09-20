@@ -32,13 +32,8 @@ module Jupiter
         @cycle = Cycle.new.tap do |c|
           c.codcur = @codcur
           c.codhab = @codhab
-          c.name = element_text_at_xpath(@doc, settings[self.class.setting_key][:name])
-          c.start_date = Date.parse element_text_at_xpath(@doc, settings[self.class.setting_key][:start_date])
-          c.ideal_duration = element_text_at_xpath(@doc, settings[self.class.setting_key][:ideal_duration])
-          c.minimum_duration = element_text_at_xpath(@doc, settings[self.class.setting_key][:minimum_duration])
-          c.maximum_duration = element_text_at_xpath(@doc, settings[self.class.setting_key][:maximum_duration])
-          c.workload = parse_workload(table_rows_ignoring_column_name_row(settings[self.class.setting_key][:workload_table]))
-          c.specific_information = element_text_at_xpath(@doc, settings[self.class.setting_key][:specific_information])
+          parse_text_fields c
+          c.courses_by_category = parse_courses(@doc.xpath(settings_at_key(:courses_table)))
         end
         success
       rescue ParserError => error
@@ -57,13 +52,45 @@ module Jupiter
       def parse_workload_row(row)
         workload_data = {}
         fields = row.xpath('td')
-        p fields
-        workload_data[:category] = element_text_at_xpath(fields[0], 'font/span')
-        workload_data[:class] = element_text_at_xpath(fields[1], 'font/span')
-        workload_data[:work] = element_text_at_xpath(fields[2], 'font/span')
-        workload_data[:total] = element_text_at_xpath(fields[3], 'font/span')
-        workload_data[:extra] = element_text_at_xpath(fields[4], 'font/span') unless fields.size < 5
+        workload_data[:category] = element_text_at_xpath(fields[0], 'font')
+        workload_data[:class] = element_text_at_xpath(fields[1], 'font')
+        workload_data[:work] = element_text_at_xpath(fields[2], 'font')
+        workload_data[:total] = element_text_at_xpath(fields[3], 'font')
+        workload_data[:extra] = element_text_at_xpath(fields[4], 'font') unless fields.size < 5
         workload_data
+      end
+
+      def parse_text_fields(cycle)
+        cycle.name = element_text_at_xpath(@doc, settings_at_key(:name))
+        cycle.start_date = Date.parse element_text_at_xpath(@doc, settings_at_key(:start_date))
+        cycle.ideal_duration = element_text_at_xpath(@doc, settings_at_key(:ideal_duration))
+        cycle.minimum_duration = element_text_at_xpath(@doc, settings_at_key(:minimum_duration))
+        cycle.maximum_duration = element_text_at_xpath(@doc, settings_at_key(:maximum_duration))
+        cycle.workload = parse_workload(table_rows_ignoring_column_name_row(settings_at_key(:workload_table)))
+        cycle.specific_information = element_formatted_text_at_xpath(@doc, settings_at_key(:specific_information))
+        cycle.observations = element_text_at_xpath(@doc, settings_at_key(:observations_text))
+      end
+
+      def parse_courses(rows)
+        courses_hash = {}
+        category = term = ''
+        rows.each do |row|
+          columns = row.xpath('td')
+          first_column = columns.first
+          if columns.size == 1
+            category = element_text_at_xpath(first_column, '*')
+            courses_hash[category] = {}
+            next
+          elsif row['bgcolor'] == '#CCCCCC'
+            term = element_text_at_xpath(first_column, 'font/span')
+            courses_hash[category][term] = []
+            next
+          else
+            course = element_text_at_xpath(first_column, 'a')
+            courses_hash[category][term] << course unless course.empty?
+          end
+        end
+        courses_hash
       end
     end
   end

@@ -44,10 +44,21 @@ module Jupiter
         ParserSettings.to_h.with_indifferent_access
       end
 
+      def settings_at_key(key)
+        settings[self.class.setting_key][key]
+      end
+
+      def element_formatted_text_at_xpath(element, xpath)
+        child_element = element.at_xpath(xpath)
+        return '' if child_element.nil?
+        child_element.css('br').each { |br| br.replace "\n" }
+        child_element.text.strip
+      end
+
       def element_text_at_xpath(element, xpath)
         child_element = element.at_xpath(xpath)
         return '' if child_element.nil?
-        child_element.text.strip
+        child_element.text.gsub(/\p{Space}/, ' ').strip.squeeze(' ')
       end
 
       def table_rows_ignoring_column_name_row(table_xpath)

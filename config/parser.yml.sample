@@ -23,13 +23,15 @@ defaults: &defaults
     cycles_table: '//*[@id="layout_conteudo"]/table[3]/tr'
   cycle:
     name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr/td/font[2]/span'
-    start_date: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[6]/tr[1]/td[2]/font/span'
-    ideal_duration: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[5]/tr[1]/td[5]/font/span'
-    minimum_duration: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[5]/tr[2]/td[5]/font/span'
-    maximum_duration: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[5]/tr[3]/td[5]/font/span'
-    workload_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[7]/tr'
-    specific_information: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[7]/tr[3]/td/font/span'
-
+    start_date: '//*[contains(text(), "Data de Início:")]/ancestor::td[1]/following-sibling::td[1]/font/span'
+    observations_text: '//*[contains(text(), "Observações:")]/ancestor::tr[1]/following-sibling::tr/descendant::font/span/child::text()'
+    ideal_duration: "//span[normalize-space(text()) = 'Ideal']/ancestor::td[1]/following-sibling::td[1]/font/span"
+    content_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td'
+    minimum_duration: "//span[normalize-space(text()) = 'Mínima']/ancestor::td[1]/following-sibling::td[1]/font/span"
+    maximum_duration: "//span[normalize-space(text()) = 'Máxima']/ancestor::td[1]/following-sibling::td[1]/font/span"
+    workload_table: "//*[normalize-space(text()) = 'Carga Horária']/ancestor::table[1]/tr"
+    specific_information: "//*[normalize-space(text()) = 'Informações Específicas']/ancestor::tr[1]/following-sibling::tr[2]"
+    courses_table: "//*[normalize-space(text())='Disciplinas Obrigatórias']/ancestor::table[1]/tr"
 development:
   <<: *defaults
 
