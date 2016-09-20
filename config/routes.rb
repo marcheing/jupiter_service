@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get 'offer/:code' => 'offers#offer', as: :offer
   get 'cycles/:code' => 'cycles#cycles', as: :cycles
   get 'cycle' => 'cycles#cycle', as: :cycle
+  get 'course/:code' => 'courses#course', as: :course
 end
