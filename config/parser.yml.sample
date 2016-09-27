@@ -32,6 +32,22 @@ defaults: &defaults
     workload_table: "//*[normalize-space(text()) = 'Carga Horária']/ancestor::table[1]/tr"
     specific_information: "//*[normalize-space(text()) = 'Informações Específicas']/ancestor::tr[1]/following-sibling::tr[2]"
     courses_table: "//*[normalize-space(text())='Disciplinas Obrigatórias']/ancestor::table[1]/tr"
+  course:
+    faculty: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[3]/tr[1]/td/b/font/span'
+    department: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[3]/tr[3]/td/b/font/span'
+    name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[3]/tr[5]/td/font/span/b'
+    alt_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[3]/tr[6]/td/font/span'
+    class_credits: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[4]/tr[1]/td[2]/font/span'
+    work_credits: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[4]/tr[2]/td[2]/font/span'
+    total_workload: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[4]/tr[3]/td[2]/font/span'
+    period: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[4]/tr[4]/td[2]/font/span'
+    activation: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[4]/tr[5]/td[2]/font/span'
+    goals: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[5]/tr[2]/td/font/span/text()'
+    professors_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[6]/tr[2]/td/table/tr'
+    short_syllabus: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[7]/tr[2]/td/font/span/text()'
+    syllabus: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[7]/tr[8]/td/font/span/text()'
+    evaluation_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[8]/tr/td[2]/table/tr[@valign="TOP"]'
+    bibliography: '//*[contains(text(), "Bibliografia")]/ancestor::table[1]/table/tr/td[2]/table/tr[1]/td[2]'
 development:
   <<: *defaults
 
