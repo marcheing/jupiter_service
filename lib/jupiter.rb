@@ -8,7 +8,8 @@ module Jupiter
     single_faculty: 'jupCursoLista'.freeze,
     offers: 'obterTurma'.freeze,
     cycles: 'jupCursoLista'.freeze,
-    cycle: 'listarGradeCurricular'.freeze
+    cycle: 'listarGradeCurricular'.freeze,
+    course: 'obterDisciplina'.freeze
   }.freeze
 
   PARAMETERS = {
