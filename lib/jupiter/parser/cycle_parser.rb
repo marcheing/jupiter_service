@@ -29,6 +29,7 @@ module Jupiter
       end
 
       def parse
+        check_for_placeholder_page
         @cycle = Cycle.new.tap do |c|
           c.codcur = @codcur
           c.codhab = @codhab
@@ -91,6 +92,12 @@ module Jupiter
           end
         end
         courses_hash
+      end
+
+      def check_for_placeholder_page
+        if element_text_at_xpath(@doc, settings_at_key(:name)).empty?
+          raise ParserError, 'Cycle page does not specify cycle name. Probably just a placeholder page'
+        end
       end
     end
   end
