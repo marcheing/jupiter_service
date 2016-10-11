@@ -2,7 +2,7 @@ defaults: &defaults
   offers:
     web_message: '//*[@id="web_mensagem"]/p'
     there_is_no_offer: 'Não existe oferecimento para a sigla '
-    separator: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[6]/tr/td/table'
+    separator: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[6]/tr/td/hr[not(@*)]'
     faculty_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[1]/td/b/font/span'
     cycle_name: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[3]/td/b/font/span'
     course: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table/tr[1]/td/table[3]/tr[5]/td/font/span/b'
@@ -46,7 +46,7 @@ defaults: &defaults
     professors_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[6]/tr[2]/td/table/tr'
     short_syllabus: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[7]/tr[2]/td/font/span/text()'
     syllabus: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[7]/tr[8]/td/font/span/text()'
-    evaluation_table: '//*[@id="layout_conteudo"]/table[1]/tr[4]/td/form/table[1]/tr[1]/td/table[8]/tr/td[2]/table/tr[@valign="TOP"]'
+    evaluation_table: '//*[normalize-space(text()) = "Avaliação"]/ancestor::table[1]/following-sibling::table[1]/tr[1]/td[2]/table/tr[@valign = "TOP"]'
     bibliography: '//*[contains(text(), "Bibliografia")]/ancestor::table[1]/table/tr/td[2]/table/tr[1]/td[2]'
 development:
   <<: *defaults
