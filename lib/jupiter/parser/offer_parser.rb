@@ -7,8 +7,6 @@ module Jupiter
         :course
       ].freeze
 
-      NUMBER_OF_TABLES_PER_OFFER = 3
-
       attr_accessor :code
       attr_reader :offers, *PAGE_FIELDS
 
@@ -60,7 +58,7 @@ module Jupiter
       end
 
       def offer_number
-        @doc.xpath(settings[self.class.setting_key][:separator]).size / NUMBER_OF_TABLES_PER_OFFER
+        @doc.xpath(settings[self.class.setting_key][:separator]).size
       end
 
       def create_static_fields
@@ -70,14 +68,14 @@ module Jupiter
       end
 
       def create_offer(elements)
-        offer_element = elements.first
-        schedule_element = elements.second
-        subscription_element = elements.third
+        offer_element = elements.find { |element| element.text =~ /Código/ }
+        schedule_element = elements.find { |element| element.text =~ /Horário/ }
+        subscription_element = elements.find { |element| element.text =~ /Matriculados/ }
         offer = Offer.new
         Offer::FIELDS.each do |field|
           offer.instance_variable_set(:"@#{field}", parse_field(field, offer_element))
         end
-        offer.schedules = Jupiter::Parser::ScheduleParser.new(schedule_element).schedules
+        offer.schedules = Jupiter::Parser::ScheduleParser.new(schedule_element).schedules unless schedule_element.nil?
         offer.subscriptions = Jupiter::Parser::SubscriptionParser.new(subscription_element).subscriptions
         offer
       end
@@ -85,9 +83,18 @@ module Jupiter
       def create_offers
         @offers = []
         offer_elements = @doc.xpath(settings[self.class.setting_key][:separator])
-        offer_elements.each_slice(NUMBER_OF_TABLES_PER_OFFER) do |tables|
+        offer_elements.each do |offer_element|
+          tables = recursively_get_relevant_offer_tables([], offer_element)
           @offers << create_offer(tables)
         end
+      end
+
+      def recursively_get_relevant_offer_tables(current_tables, offer_element)
+        element = offer_element.previous_element
+        # Going through the elements, the method will stop if there isn't anything else (nil) or reaches the previous offer (hr)
+        return current_tables if element.nil? || element.name == 'hr'
+        current_tables << element if element.name == 'table'
+        recursively_get_relevant_offer_tables(current_tables, element)
       end
     end
   end

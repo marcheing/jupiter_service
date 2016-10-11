@@ -69,6 +69,37 @@ describe OffersController do
       end
     end
 
+    context 'ACH0162 from 2016, 2nd term' do
+      let(:schedule_day) { 'ter' }
+      let(:schedule_start_time) { '08:00' }
+      let(:schedule_end_time) { '09:45' }
+      let(:schedule_professor_1) { 'Marilia Velardi' }
+
+      let(:fifth_offer_class_code) { '2016232' }
+      let(:fifth_offer_start_date) { '01/08/2016' }
+      let(:fifth_offer_end_date) { '10/12/2016' }
+
+      it 'correctly parses the page' do
+        VCR.use_cassette 'offers/ach0162_20162' do
+          get :offer, params: { code: 'ACH0162' }
+
+          response_body = JSON.parse response.body
+          offers = response_body['offers']
+          expect(offers.first['schedules'].size).to eq 1
+          expect(offers.first['schedules'].first['start_time']).to eq schedule_start_time
+          expect(offers.first['schedules'].first['end_time']).to eq schedule_end_time
+          expect(offers.first['schedules'].first['professor']).to eq schedule_professor_1
+
+          # The fifth offer should not have schedules
+          expect(offers[4]['schedules']).to be_nil
+          expect(offers[4]['subscriptions']).to_not be_nil
+          expect(offers[4]['class_code']).to eq fifth_offer_class_code
+          expect(offers[4]['start_date']).to eq fifth_offer_start_date
+          expect(offers[4]['end_date']).to eq fifth_offer_end_date
+        end
+      end
+    end
+
     context 'course without offer' do
       it 'responds with unprocessable entity' do
         VCR.use_cassette 'offers/mac2166_20162' do
