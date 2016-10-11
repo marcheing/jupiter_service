@@ -2,13 +2,13 @@
 lock '3.6.1'
 
 set :application, 'jupiter_service'
-set :repo_url, 'git@github.com/marcheing/jupiter_service'
+set :repo_url, 'git@github.com:marcheing/jupiter_service'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/marcheing/jupiter_service'
+set :deploy_to, '/home/jupiter_service'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -24,7 +24,7 @@ set :deploy_to, '/home/marcheing/jupiter_service'
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, 'config/database.yml', 'config/secrets.yml'
+append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
