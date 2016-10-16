@@ -29,5 +29,6 @@ module JupiterService
 
     # Autoload settings file
     config.autoload_paths += %W(#{config.root}/lib/settings)
+    config.eager_load_paths += %W(#{config.root}/lib/settings)
   end
 end
