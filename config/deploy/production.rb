@@ -54,3 +54,5 @@ server 'bcc.ime.usp.br', roles: [:web], primary: true, user: 'jupiter_service'
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
+
+set :rvm_type, :user
