@@ -100,6 +100,26 @@ describe OffersController do
       end
     end
 
+    context 'CMU0402 from 2016, 2nd term' do
+      let(:professor) { 'Francisco José da Silva Campos Neto (R)' }
+      let(:activity_type) { 'Aulas Práticas com Horário Variável' }
+      let(:workload) { 15 }
+
+      it 'correctly parses the page and adds didactic activities instead of schedules' do
+        VCR.use_cassette 'offers/cmu0402_20162' do
+          get :offer, params: { code: 'CMU0402' }
+
+          response_body = JSON.parse response.body
+          offers = response_body['offers']
+          expect(offers.first['schedules']).to be_nil
+          expect(offers.first['didactic_activities'].size).to eq 1
+          expect(offers.first['didactic_activities'].first['professor']).to eq professor
+          expect(offers.first['didactic_activities'].first['type']).to eq activity_type
+          expect(offers.first['didactic_activities'].first['workload']).to eq workload
+        end
+      end
+    end
+
     context 'course without offer' do
       it 'responds with unprocessable entity' do
         VCR.use_cassette 'offers/mac2166_20162' do
