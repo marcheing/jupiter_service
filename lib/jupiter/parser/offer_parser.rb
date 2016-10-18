@@ -69,15 +69,21 @@ module Jupiter
 
       def create_offer(elements)
         offer_element = elements.find { |element| element.text =~ /Código/ }
-        schedule_element = elements.find { |element| element.text =~ /Horário/ }
+        schedule_element = find_xml_element_that_starts_with 'Horário', elements
+        didactic_activity_element = find_xml_element_that_starts_with 'Atividades', elements
         subscription_element = elements.find { |element| element.text =~ /Matriculados/ }
-        offer = Offer.new
-        Offer::FIELDS.each do |field|
-          offer.instance_variable_set(:"@#{field}", parse_field(field, offer_element))
+        Offer.new.tap do |offer|
+          Offer::FIELDS.each do |field|
+            offer.instance_variable_set(:"@#{field}", parse_field(field, offer_element))
+          end
+          parse_offer_elements(offer, schedule_element, didactic_activity_element, subscription_element)
         end
+      end
+
+      def parse_offer_elements(offer, schedule_element, didactic_activity_element, subscription_element)
         offer.schedules = Jupiter::Parser::ScheduleParser.new(schedule_element).schedules unless schedule_element.nil?
+        offer.didactic_activities = Jupiter::Parser::DidacticActivityParser.new(didactic_activity_element).didactic_activities unless didactic_activity_element.nil?
         offer.subscriptions = Jupiter::Parser::SubscriptionParser.new(subscription_element).subscriptions
-        offer
       end
 
       def create_offers

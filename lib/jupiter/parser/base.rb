@@ -64,6 +64,10 @@ module Jupiter
       def table_rows_ignoring_column_name_row(table_xpath)
         @doc.xpath(table_xpath)[1..-1]
       end
+
+      def find_xml_element_that_starts_with(string, elements)
+        elements.find { |element| element.text.strip.start_with? string }
+      end
     end
   end
 end
