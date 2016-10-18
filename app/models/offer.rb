@@ -7,5 +7,5 @@ class Offer
     :observations
   ].freeze
 
-  attr_accessor :schedules, :subscriptions, *FIELDS
+  attr_accessor :schedules, :subscriptions, :didactic_activities, *FIELDS
 end
