@@ -22,6 +22,9 @@ gem 'capistrano', '~> 3.6'
 # Support for rvm usage on capistrano tasks
 gem 'capistrano-rvm'
 
+# Ruby Interface for Postgresql
+gem 'pg', '~> 0.19'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
