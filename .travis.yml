@@ -1,8 +1,14 @@
 language: ruby
 
+before_script:
+  - psql -c "CREATE ROLE jupiter_service WITH CREATEDB LOGIN PASSWORD 'jupiter_service';" -U postgres
+
 script:
 - ./bin/setup
 - bundle exec rake
 
 rvm:
   - 2.3.1
+
+services:
+  - postgresql
