@@ -19,6 +19,7 @@ chdir APP_ROOT do
   system('bundle check') || system!('bundle install')
 
   puts "\n== Copying sample files =="
+  system!('cp -n config/database.yml.sample config/database.yml')
   system!('cp -n config/application.yml.sample config/application.yml')
   system!('cp -n config/parser.yml.sample config/parser.yml')
 
