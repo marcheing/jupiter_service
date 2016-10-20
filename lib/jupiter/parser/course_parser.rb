@@ -72,10 +72,7 @@ module Jupiter
         professors_table = @doc.xpath(settings_at_key(:professors_table))
         professors_table.map do |row|
           prof_data = element_text_at_xpath(row, 'td[2]/font').split(' - ')
-          Professor.new.tap do |p|
-            p.code = prof_data.first.to_i
-            p.name = prof_data.last
-          end
+          Professor.find_or_create_by(code: prof_data.first.to_i, name: prof_data.last)
         end
       end
 
