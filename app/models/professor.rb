@@ -1,3 +1,1 @@
-class Professor
-  attr_accessor :code, :name
-end
+class Professor < ApplicationRecord; end
