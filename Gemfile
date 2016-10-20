@@ -37,6 +37,9 @@ group :development, :test do
 
   # Records HTTP responses from external services for testing
   gem 'vcr', '~> 3.0.3'
+
+  # Factory definition/usage with automatic loading for rails
+  gem 'factory_girl_rails', '~> 4.7'
 end
 
 group :test do
