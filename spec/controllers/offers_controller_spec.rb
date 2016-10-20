@@ -9,7 +9,7 @@ describe OffersController do
       let(:first_schedule_day) { 'ter' }
       let(:first_schedule_start_time) { '21:10' }
       let(:first_schedule_end_time) { '22:50' }
-      let(:first_schedule_professor) { 'Alfredo Goldman Vel Lejbman' }
+      let(:first_schedule_professor) { JSON.parse build(:professor, code: nil, name: 'Alfredo Goldman Vel Lejbman').to_json }
       let(:first_subscription_type) { 'Obrigatória' }
       let(:first_subscription_vacancy) { 70 }
       let(:first_subscription_subscribed) { 82 }
@@ -51,9 +51,9 @@ describe OffersController do
       let(:schedule_day) { 'seg' }
       let(:schedule_start_time) { '08:00' }
       let(:schedule_end_time) { '12:00' }
-      let(:schedule_professor_1) { 'Diamantino Alves Correia Pereira' }
-      let(:schedule_professor_2) { 'Dominique Mouette' }
-      let(:schedule_professor_3) { 'Fabio Campos' }
+      let(:schedule_professor_1) { JSON.parse build(:professor, code: nil, name: 'Diamantino Alves Correia Pereira').to_json }
+      let(:schedule_professor_2) { JSON.parse build(:professor, code: nil, name: 'Dominique Mouette').to_json }
+      let(:schedule_professor_3) { JSON.parse build(:professor, code: nil, name: 'Fabio Campos').to_json }
 
       it 'correctly parsers the professors on the schedules' do
         VCR.use_cassette 'offers/ach0042_20162' do
@@ -73,7 +73,7 @@ describe OffersController do
       let(:schedule_day) { 'ter' }
       let(:schedule_start_time) { '08:00' }
       let(:schedule_end_time) { '09:45' }
-      let(:schedule_professor_1) { 'Marilia Velardi' }
+      let(:schedule_professor_1) { JSON.parse build(:professor, code: nil, name: 'Marilia Velardi').to_json }
 
       let(:fifth_offer_class_code) { '2016232' }
       let(:fifth_offer_start_date) { '01/08/2016' }

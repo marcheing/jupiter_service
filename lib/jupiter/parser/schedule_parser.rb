@@ -28,7 +28,7 @@ module Jupiter
         schedule.day = element_text_at_xpath(fields[0], 'font/span')
         schedule.start_time = element_text_at_xpath(fields[1], 'font/span')
         schedule.end_time = element_text_at_xpath(fields[2], 'font/span')
-        schedule.professor = element_text_at_xpath(fields[3], 'font/span')
+        schedule.professor = Professor.find_or_create_by(name: element_text_at_xpath(fields[3], 'font/span'))
         schedule
       end
     end
