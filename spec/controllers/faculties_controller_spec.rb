@@ -2,27 +2,25 @@ require 'rails_helper'
 
 describe FacultiesController do
   let(:ime) do
-    Faculty.new.tap do |f|
-      f.code = 45
-      f.name = 'Instituto de Matemática e Estatística'
-      f.campus = 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"'
-    end
+    build(:faculty,
+      code: 45,
+      name: 'Instituto de Matemática e Estatística',
+      campus: 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"')
   end
 
   describe 'all_faculties' do
     let(:poli) do
-      Faculty.new.tap do |f|
-        f.code = 3
-        f.name = 'Escola Politécnica'
-        f.campus = 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"'
-      end
+      build(:faculty,
+        code: 3,
+        name: 'Escola Politécnica',
+        campus: 'São Paulo - Cidade Universitária "Armando de Salles Oliveira"')
     end
 
     let(:other_entity) do
-      Faculty.new.tap do |f|
-        f.code = 30
-        f.name = 'Centro de Biologia Marinha'
-      end
+      build(:faculty,
+        code: 30,
+        name: 'Centro de Biologia Marinha',
+        campus: nil)
     end
 
     it 'returns a list of faculties' do
