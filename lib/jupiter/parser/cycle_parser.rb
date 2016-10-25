@@ -42,7 +42,7 @@ module Jupiter
       end
 
       def parse_workload(table)
-        Workload.new.tap do |w|
+        Workload.create do |w|
           w.mandatory = parse_workload_row(table.first)
           w.optional = parse_workload_row(table[1])
           w.elective = parse_workload_row(table[2])

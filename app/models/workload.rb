@@ -1,3 +1,1 @@
-class Workload
-  attr_accessor :mandatory, :optional, :elective, :total
-end
+class Workload < ApplicationRecord; end
