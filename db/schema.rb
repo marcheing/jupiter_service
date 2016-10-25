@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025111322) do
+ActiveRecord::Schema.define(version: 20161025112337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20161025111322) do
     t.integer  "enrolled"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "workloads", force: :cascade do |t|
+    t.text     "mandatory"
+    t.text     "optional"
+    t.text     "elective"
+    t.text     "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
