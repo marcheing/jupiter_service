@@ -1,3 +1,1 @@
-class Faculty
-  attr_accessor :code, :name, :campus
-end
+class Faculty < ApplicationRecord; end
