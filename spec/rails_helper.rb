@@ -58,3 +58,11 @@ RSpec.configure do |config|
   # Add factory girl methods
   config.include FactoryGirl::Syntax::Methods
 end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    # Choose one or more libraries:
+    with.library :rails
+  end
+end
