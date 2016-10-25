@@ -33,6 +33,7 @@ module Jupiter
         [:vacancy, :subscribed, :pending, :enrolled].each do |subscription_field|
           subscription.send("#{subscription_field}=", element_text_at_xpath(fields.shift, 'font/span').to_i)
         end
+        subscription.save
         subscription
       end
     end
