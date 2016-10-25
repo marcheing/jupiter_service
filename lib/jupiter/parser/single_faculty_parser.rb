@@ -49,11 +49,9 @@ module Jupiter
       end
 
       def create_faculty
-        @faculty = Faculty.new.tap do |f|
-          f.code = @code
-          f.name = parse_field(:name)
-          f.campus = parse_field(:campus).split('Campus: ').last
-        end
+        name = parse_field(:name)
+        campus = parse_field(:campus).split('Campus: ').last
+        @faculty = Faculty.find_or_create_by(code: @code, name: name, campus: campus)
       end
     end
   end

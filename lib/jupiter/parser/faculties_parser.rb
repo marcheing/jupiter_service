@@ -52,10 +52,7 @@ module Jupiter
         faculty_page = @client.single_faculty(code)
         parser = Jupiter::Parser::SingleFacultyParser.new(faculty_page, code)
         return parser.faculty if parser.successful?
-        Faculty.new.tap do |f|
-          f.code = code
-          f.name = element_text_at_xpath(fields[1], 'font/span/a')
-        end
+        Faculty.find_or_create_by(code: code, name: element_text_at_xpath(fields[1], 'font/span/a'))
       end
     end
   end
