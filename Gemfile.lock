@@ -153,6 +153,8 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
     settingslogic (2.0.9)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     simplecov (0.12.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -200,6 +202,7 @@ DEPENDENCIES
   rspec-rails (~> 3.5)
   rubocop (~> 0.42.0)
   settingslogic (~> 2.0.8)
+  shoulda-matchers (~> 3.1)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)

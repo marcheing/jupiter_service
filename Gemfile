@@ -45,6 +45,9 @@ end
 group :test do
   # Code coverage measures for tests
   gem 'simplecov', require: false
+
+  # Collection of testing matchers
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
