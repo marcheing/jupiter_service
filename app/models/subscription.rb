@@ -1,3 +1,3 @@
 class Subscription
-  attr_accessor :type, :assigned_to, :vacancy, :subscribed, :pending, :enrolled
+  attr_accessor :kind, :assigned_to, :vacancy, :subscribed, :pending, :enrolled
 end

@@ -14,7 +14,7 @@ module Jupiter
         subscription_data = @doc.xpath('tr')[1..-1]
         subscription_data.each do |row|
           subscription = create_subscription(row)
-          subscription.type = @subscriptions.last.type if subscription.type.nil?
+          subscription.kind = @subscriptions.last.kind if subscription.kind.nil?
           subscriptions << subscription
         end
       end
@@ -27,7 +27,7 @@ module Jupiter
           subscription.assigned_to = element_text_at_xpath(fields[1], 'font/span')
           fields = fields[2..-1]
         else
-          subscription.type = first_field.text.strip
+          subscription.kind = first_field.text.strip
           fields = fields[1..-1]
         end
         [:vacancy, :subscribed, :pending, :enrolled].each do |subscription_field|
