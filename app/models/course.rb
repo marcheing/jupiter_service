@@ -2,6 +2,8 @@ class Course < ApplicationRecord
   has_one :course_workload
   has_one :course_evaluation
   has_and_belongs_to_many :professors
+  has_many :cycles, through: :ideal_terms
+  has_many :ideal_terms
 
   alias workload course_workload
   alias workload= course_workload=
