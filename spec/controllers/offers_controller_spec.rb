@@ -113,9 +113,9 @@ describe OffersController do
           offers = response_body['offers']
           expect(offers.first['schedules']).to be_nil
           expect(offers.first['didactic_activities'].size).to eq 1
-          expect(offers.first['didactic_activities'].first['professor']).to eq professor
-          expect(offers.first['didactic_activities'].first['type']).to eq activity_type
-          expect(offers.first['didactic_activities'].first['workload']).to eq workload
+          expect(offers.first['didactic_activities'].first['professor']['name']).to eq professor
+          expect(offers.first['didactic_activities'].first['activity_type']).to eq activity_type
+          expect(offers.first['didactic_activities'].first['workload_hours']).to eq workload
         end
       end
     end

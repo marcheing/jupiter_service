@@ -22,11 +22,10 @@ module Jupiter
 
       def create_didactic_activity(row)
         fields = row.xpath('td')
-        DidacticActivity.new.tap do |d|
-          d.professor = element_text_at_xpath(fields[0], 'font/span')
-          d.type = element_text_at_xpath(fields[1], 'font/span')
-          d.workload = element_text_at_xpath(fields[2], 'font/span').to_i
-        end
+        professor_name = element_text_at_xpath(fields[0], 'font/span')
+        type = element_text_at_xpath(fields[1], 'font/span')
+        workload = element_text_at_xpath(fields[2], 'font/span').to_i
+        DidacticActivity.find_or_create_by(professor: Professor.find_or_create_by(name: professor_name), activity_type: type, workload_hours: workload)
       end
     end
   end
