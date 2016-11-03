@@ -32,13 +32,12 @@ module Jupiter
       def get_cycles_from_table(table)
         table.map do |row|
           fields = row.xpath('td')
-          Cycle.new.tap do |c|
-            c.name = element_text_at_xpath(fields[0], 'font/span')
-            c.period = element_text_at_xpath(fields[1], 'font/span')
-            codes = parse_codes fields[0].at_xpath('font/span/a')['href']
-            c.codcur = codes[:codcur].to_i
-            c.codhab = codes[:codhab].to_i
-          end
+          name = element_text_at_xpath(fields[0], 'font/span')
+          period = element_text_at_xpath(fields[1], 'font/span')
+          codes = parse_codes fields[0].at_xpath('font/span/a')['href']
+          codcur = codes[:codcur].to_i
+          codhab = codes[:codhab].to_i
+          Cycle.find_or_create_by(name: name, period: period, codcur: codcur, codhab: codhab)
         end
       end
 

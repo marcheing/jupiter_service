@@ -30,11 +30,15 @@ module Jupiter
 
       def parse
         check_for_placeholder_page
-        @cycle = Cycle.new.tap do |c|
-          c.codcur = @codcur
-          c.codhab = @codhab
-          parse_text_fields c
-          c.courses_by_category = parse_courses(@doc.xpath(settings_at_key(:courses_table)))
+        @cycle = Cycle.find_by(codcur: @codcur, codhab: @codhab)
+        if @cycle.nil?
+          @cycle = Cycle.new.tap do |c|
+            c.codcur = @codcur
+            c.codhab = @codhab
+            parse_text_fields c
+            c.courses_by_category = parse_courses(@doc.xpath(settings_at_key(:courses_table)))
+          end
+          @cycle.save
         end
         success
       rescue ParserError => error
