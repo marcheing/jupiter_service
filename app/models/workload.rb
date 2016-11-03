@@ -1,1 +1,3 @@
-class Workload < ApplicationRecord; end
+class Workload < ApplicationRecord
+  belongs_to :cycle
+end

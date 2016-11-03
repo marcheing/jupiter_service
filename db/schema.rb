@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103130959) do
+ActiveRecord::Schema.define(version: 20161103131429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,21 @@ ActiveRecord::Schema.define(version: 20161103130959) do
   create_table "courses_professors", force: :cascade do |t|
     t.integer "course_id",    null: false
     t.integer "professor_id", null: false
+  end
+
+  create_table "cycles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "period"
+    t.integer  "codcur"
+    t.integer  "codhab"
+    t.date     "start_date"
+    t.string   "ideal_duration"
+    t.string   "minimum_duration"
+    t.string   "maximum_duration"
+    t.text     "specific_information"
+    t.text     "observations"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "didactic_activities", force: :cascade do |t|
@@ -120,6 +135,8 @@ ActiveRecord::Schema.define(version: 20161103130959) do
     t.text     "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "cycle_id"
+    t.index ["cycle_id"], name: "index_workloads_on_cycle_id", using: :btree
   end
 
 end
