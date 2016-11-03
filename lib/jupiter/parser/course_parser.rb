@@ -61,11 +61,10 @@ module Jupiter
       end
 
       def parse_workload
-        workload = {}
-        workload[:class_credits] = element_text_at_xpath(@doc, settings_at_key(:class_credits)).to_i
-        workload[:work_credits] = element_text_at_xpath(@doc, settings_at_key(:work_credits)).to_i
-        workload[:total] = element_text_at_xpath(@doc, settings_at_key(:total_workload)).to_i
-        workload
+        class_credits = element_text_at_xpath(@doc, settings_at_key(:class_credits)).to_i
+        work_credits = element_text_at_xpath(@doc, settings_at_key(:work_credits)).to_i
+        total = element_text_at_xpath(@doc, settings_at_key(:total_workload)).to_i
+        CourseWorkload.create(class_credits: class_credits, work_credits: work_credits, total: total)
       end
 
       def parse_professors
@@ -77,12 +76,11 @@ module Jupiter
       end
 
       def parse_evaluation
-        evaluation = {}
         evaluation_table = @doc.xpath(settings_at_key(:evaluation_table))
-        evaluation[:method] = element_text_at_xpath(evaluation_table.first, 'td/font')
-        evaluation[:criterion] = element_text_at_xpath(evaluation_table[1], 'td/font')
-        evaluation[:rec] = element_text_at_xpath(evaluation_table.last, 'td/font')
-        evaluation
+        method = element_text_at_xpath(evaluation_table.first, 'td/font')
+        criterion = element_text_at_xpath(evaluation_table[1], 'td/font')
+        rec = element_text_at_xpath(evaluation_table.last, 'td/font')
+        CourseEvaluation.create(method: method, criterion: criterion, rec: rec)
       end
     end
   end

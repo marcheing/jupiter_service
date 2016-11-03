@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103120045) do
+ActiveRecord::Schema.define(version: 20161103124225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "course_evaluations", force: :cascade do |t|
+    t.string   "method"
+    t.string   "criterion"
+    t.string   "rec"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_evaluations_on_course_id", using: :btree
+  end
+
+  create_table "course_workloads", force: :cascade do |t|
+    t.integer  "class_credits"
+    t.integer  "work_credits"
+    t.integer  "total"
+    t.integer  "course_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["course_id"], name: "index_course_workloads_on_course_id", using: :btree
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -21,15 +41,20 @@ ActiveRecord::Schema.define(version: 20161103120045) do
     t.string   "alt_name"
     t.string   "faculty"
     t.string   "department"
-    t.text     "workload"
     t.string   "period"
     t.date     "activation_date"
     t.text     "goals"
+    t.text     "syllabus"
     t.text     "short_syllabus"
     t.text     "evaluation"
     t.text     "bibliography"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "courses_professors", force: :cascade do |t|
+    t.integer "course_id",    null: false
+    t.integer "professor_id", null: false
   end
 
   create_table "didactic_activities", force: :cascade do |t|

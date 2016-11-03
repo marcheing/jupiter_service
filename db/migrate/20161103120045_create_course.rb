@@ -6,11 +6,10 @@ class CreateCourse < ActiveRecord::Migration[5.0]
       t.string :alt_name
       t.string :faculty
       t.string :department
-      t.text :workload
       t.string :period
       t.date :activation_date
       t.text :goals
-      t.text :short_syllabus
+      t.text :syllabus
       t.text :short_syllabus
       t.text :evaluation
       t.text :bibliography
