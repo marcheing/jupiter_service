@@ -59,12 +59,14 @@ describe CyclesController do
 
           response_body = JSON.parse response.body
           cycle = response_body['cycle']
+          cycle_on_db = Cycle.first
           expect(cycle['name']).to eq cycle_name
           expect(cycle['observations']).to eq observations
           expect(cycle['start_date']).to eq start_date
           expect(cycle['ideal_duration']).to eq ideal_duration
           expect(cycle['minimum_duration']).to eq minimum_duration
           expect(cycle['maximum_duration']).to eq maximum_duration
+          expect(IdealTerm.where(cycle: cycle_on_db)).to_not be_empty
         end
       end
     end

@@ -36,8 +36,10 @@ module Jupiter
             c.codcur = @codcur
             c.codhab = @codhab
             parse_text_fields c
-            c.courses_by_category = parse_courses(@doc.xpath(settings_at_key(:courses_table)))
           end
+          @cycle.save
+          courses_by_category = parse_courses(@doc.xpath(settings_at_key(:courses_table)))
+          @cycle.ideal_terms = parse_ideal_terms_from_courses_by_category_hash(courses_by_category)
           @cycle.save
         end
         success
@@ -91,11 +93,20 @@ module Jupiter
             courses_hash[category][term] = []
             next
           else
-            course = element_text_at_xpath(first_column, 'a')
-            courses_hash[category][term] << course unless course.empty?
+            courses_hash[category][term] << Course.find_or_create_by(code: element_text_at_xpath(first_column, 'a'))
           end
         end
         courses_hash
+      end
+
+      def parse_ideal_terms_from_courses_by_category_hash(courses_by_category_hash)
+        courses_by_category_hash.map do |category, terms_hash|
+          terms_hash.map do |term_value, courses|
+            courses.map do |course|
+              IdealTerm.create(cycle: @cycle, course: course, category: category, term: term_value)
+            end
+          end
+        end.flatten
       end
 
       def check_for_placeholder_page
