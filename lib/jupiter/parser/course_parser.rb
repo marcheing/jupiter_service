@@ -27,33 +27,37 @@ module Jupiter
       end
 
       def parse
-        @course = Course.new.tap do |c|
-          c.code = @code
-          parse_simple_text_fields c
-          parse_formatted_text_fields c
-          c.name = parse_course_name
-          c.workload = parse_workload
-          c.professors = parse_professors
-          c.evaluation = parse_evaluation
+        @course = Course.find_by(code: @code)
+        if @course.nil?
+          @course = Course.new.tap do |c|
+            c.code = @code
+            parse_simple_text_fields c
+            parse_formatted_text_fields c
+            c.name = parse_course_name
+            c.workload = parse_workload
+            c.professors = parse_professors
+            c.evaluation = parse_evaluation
+          end
+          @course.save
         end
         success
       rescue ParserError => error
         failure(error.message)
       end
 
-      def parse_formatted_text_fields(cycle)
-        cycle.goals = element_formatted_text_at_xpath(@doc, settings_at_key(:goals))
-        cycle.bibliography = element_formatted_text_at_xpath(@doc, settings_at_key(:bibliography))
+      def parse_formatted_text_fields(course)
+        course.goals = element_formatted_text_at_xpath(@doc, settings_at_key(:goals))
+        course.bibliography = element_formatted_text_at_xpath(@doc, settings_at_key(:bibliography))
       end
 
-      def parse_simple_text_fields(cycle)
-        cycle.faculty = element_text_at_xpath(@doc, settings_at_key(:faculty))
-        cycle.department = element_text_at_xpath(@doc, settings_at_key(:department))
-        cycle.alt_name = element_text_at_xpath(@doc, settings_at_key(:alt_name))
-        cycle.period = element_text_at_xpath(@doc, settings_at_key(:period))
-        cycle.activation_date = Date.parse(element_text_at_xpath(@doc, settings_at_key(:activation)))
-        cycle.syllabus = element_text_at_xpath(@doc, settings_at_key(:syllabus))
-        cycle.short_syllabus = element_text_at_xpath(@doc, settings_at_key(:short_syllabus))
+      def parse_simple_text_fields(course)
+        course.faculty = element_text_at_xpath(@doc, settings_at_key(:faculty))
+        course.department = element_text_at_xpath(@doc, settings_at_key(:department))
+        course.alt_name = element_text_at_xpath(@doc, settings_at_key(:alt_name))
+        course.period = element_text_at_xpath(@doc, settings_at_key(:period))
+        course.activation_date = Date.parse(element_text_at_xpath(@doc, settings_at_key(:activation)))
+        course.syllabus = element_text_at_xpath(@doc, settings_at_key(:syllabus))
+        course.short_syllabus = element_text_at_xpath(@doc, settings_at_key(:short_syllabus))
       end
 
       def parse_course_name
