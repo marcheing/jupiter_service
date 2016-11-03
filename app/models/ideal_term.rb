@@ -1,0 +1,2 @@
+class IdealTerm < ApplicationRecord
+end
