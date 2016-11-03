@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025113818) do
+ActiveRecord::Schema.define(version: 20161103113913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "didactic_activities", force: :cascade do |t|
+    t.integer  "workload_hours"
+    t.string   "activity_type"
+    t.integer  "professor_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["professor_id"], name: "index_didactic_activities_on_professor_id", using: :btree
+  end
 
   create_table "faculties", force: :cascade do |t|
     t.integer  "code",       null: false
