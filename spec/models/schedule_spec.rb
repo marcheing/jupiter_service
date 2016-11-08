@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Schedule do
   describe 'associations' do
     it { is_expected.to belong_to(:professor) }
+    it { is_expected.to belong_to(:offer) }
   end
 
   describe 'as_json' do

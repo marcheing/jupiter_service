@@ -1,1 +1,3 @@
-class Subscription < ApplicationRecord; end
+class Subscription < ApplicationRecord
+  belongs_to :offer
+end

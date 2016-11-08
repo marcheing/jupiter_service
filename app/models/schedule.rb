@@ -1,5 +1,6 @@
 class Schedule < ApplicationRecord
   belongs_to :professor
+  belongs_to :offer
 
   def as_json(options = {})
     options[:except] ||= []

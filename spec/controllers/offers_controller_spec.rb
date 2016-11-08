@@ -76,8 +76,8 @@ describe OffersController do
       let(:schedule_professor_1) { JSON.parse build(:professor, code: nil, name: 'Marilia Velardi').to_json }
 
       let(:fifth_offer_class_code) { '2016232' }
-      let(:fifth_offer_start_date) { '01/08/2016' }
-      let(:fifth_offer_end_date) { '10/12/2016' }
+      let(:fifth_offer_start_date) { JSON.parse Date.parse('01/08/2016').to_json }
+      let(:fifth_offer_end_date) { JSON.parse Date.parse('10/12/2016').to_json }
 
       it 'correctly parses the page' do
         VCR.use_cassette 'offers/ach0162_20162' do

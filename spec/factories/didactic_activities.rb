@@ -1,8 +1,7 @@
 FactoryGirl.define do
-  factory :schedule do
-    day 'ter'
-    start_time '10:20'
-    end_time '10:21'
+  factory :didactic_activity do
+    workload_hours 2
+    activity_type 'type'
     association :professor, factory: :professor, strategy: :build
     association :offer, factory: :offer, strategy: :build
   end
