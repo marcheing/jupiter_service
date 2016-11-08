@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103131429) do
+ActiveRecord::Schema.define(version: 20161108114734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20161103131429) do
     t.integer  "professor_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "offer_id"
+    t.index ["offer_id"], name: "index_didactic_activities_on_offer_id", using: :btree
     t.index ["professor_id"], name: "index_didactic_activities_on_professor_id", using: :btree
   end
 
@@ -100,6 +102,18 @@ ActiveRecord::Schema.define(version: 20161103131429) do
     t.index ["cycle_id"], name: "index_ideal_terms_on_cycle_id", using: :btree
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.integer  "course_id",    null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "class_type"
+    t.string   "class_code"
+    t.text     "observations"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["course_id"], name: "index_offers_on_course_id", using: :btree
+  end
+
   create_table "professors", force: :cascade do |t|
     t.integer  "code"
     t.string   "name"
@@ -114,6 +128,8 @@ ActiveRecord::Schema.define(version: 20161103131429) do
     t.integer  "professor_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "offer_id"
+    t.index ["offer_id"], name: "index_schedules_on_offer_id", using: :btree
     t.index ["professor_id"], name: "index_schedules_on_professor_id", using: :btree
   end
 
@@ -126,6 +142,8 @@ ActiveRecord::Schema.define(version: 20161103131429) do
     t.integer  "enrolled"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "offer_id"
+    t.index ["offer_id"], name: "index_subscriptions_on_offer_id", using: :btree
   end
 
   create_table "workloads", force: :cascade do |t|
