@@ -73,10 +73,11 @@ module Jupiter
         didactic_activity_element = find_xml_element_that_starts_with 'Atividades', elements
         subscription_element = elements.find { |element| element.text =~ /Matriculados/ }
         Offer.new.tap do |offer|
-          Offer::FIELDS.each do |field|
-            offer.instance_variable_set(:"@#{field}", parse_field(field, offer_element))
+          %w(class_code start_date end_date class_type observations).each do |field|
+            offer.send("#{field}=", parse_field(field, offer_element))
           end
           parse_offer_elements(offer, schedule_element, didactic_activity_element, subscription_element)
+          offer.course = Course.find_or_create_by(code: @code)
         end
       end
 
@@ -93,6 +94,7 @@ module Jupiter
           tables = recursively_get_relevant_offer_tables([], offer_element)
           @offers << create_offer(tables)
         end
+        @offers.map(&:save!)
       end
 
       def recursively_get_relevant_offer_tables(current_tables, offer_element)
